@@ -1,0 +1,118 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-fluid">
+    <h5>Deixe sua pergunta aqui.</h5>
+    <form method="post" role="form" asp-page-handler="CreateQuestion">
+        <input type="hidden" asp-for="PageIndex" value="@Model.PageIndex" />
+        <div class="form-group mb-3">
+            <textarea asp-for="Question" role="textbox"></textarea>
+            <span asp-validation-for="Question"></span>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success my-4" name="create-question">
+                <i class="fa fa-send-o"></i>
+                Enviar Pergunta
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="section">
+    <div class="container-fluid">
+        <h5>Questões já publicadas.</h5>
+        <form method="post" role="form">
+            <input type="hidden" asp-for="PageIndex" value="@Model.PageIndex" />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select asp-items="Model.OrderItems" asp-for="OrderBy"
+                                class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="search"
+                                   asp-for="Search" placeholder="Procurar...">
+                            <span class="input-group-append">
+                                <button class="input-group-text bg-gradient-default" type="submit"
+                                        title="Buscar" asp-page-handler="Search">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Search"></span>
+                    </div>
+                </div>
+            </div>
+
+            @if ((Model.Questions?.Total ?? 0) == 0 && Model.Initial)
+            {
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="alert alert-info">Nenhuma pergunta cadastrada.</div>
+                    </div>
+                </div>
+            }
+            else if (!Model.Questions.Items.Any())
+            {
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="alert alert-info">Nenhuma pergunta encontrada.</div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                @foreach (var question in Model.Questions.Items)
+                {
+                    <div class="row">
+                        <div class="col-12">
+                            <section class="section p-3">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <div class="float-left">
+                                            <span class="text-primary">Autor: @question.User</span>
+                                            <button class="btn btn-icon-only btn-sm fa fa-trash"
+                                                    asp-page-handler="DeleteQuestion"
+                                                    asp-route-questionId="@question.Id"></button>
+                                        </div>
+                                        <div class="float-right">
+                                            <span class="text-danger">Respostas: @question.Answers.Count</span>
+                                            <a asp-page="Question" asp-route-questionId="@question.Id"
+                                               class="btn btn-dark btn-sm">Ver Detalhes</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @Html.Raw(question.FormattedText.Split("<hr />", StringSplitOptions.RemoveEmptyEntries)[0])
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="alert alert-default">Exibindo @Model.Questions.Items.Count perguntas de @Model.Questions.Total.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg">
+                        @if (Model.PageIndex > 1)
+                        {
+                            <button type="submit" asp-page-handler="PreviousPage" class="btn btn-outline-default float-left">Anterior</button>
+                        }
+                        @if (Convert.ToUInt64(Model.PageIndex * 10) < Model.Questions.Total)
+                        {
+                            <button type="submit" asp-page-handler="NextPage" class="btn btn-outline-default float-right">Próximo</button>
+                        }
+                    </div>
+                </div>
+            }
+        </form>
+    </div>
+</div>

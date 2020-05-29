@@ -1,0 +1,88 @@
+﻿@page "/question/{questionId:uid}"
+@model Quests.App.Pages.QuestionModel
+@{
+    ViewData["Title"] = "Pergunta";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h5>Pergunta de <small class="text-info">@Model.Question.User</small></h5>
+            <div class="section p-1">
+                @Html.Raw(Model.Question.FormattedText)
+            </div>
+            <div class="section">
+                <h5>Respostas: @Model.Question.Answers.Count</h5>
+                <form method="post">
+                    <h6>Deixar uma Resposta</h6>
+                    <div class="form-group mb-3">
+                        <textarea asp-for="Answer" role="textbox"></textarea>
+                        <span asp-validation-for="Answer"></span>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success my-4"
+                                asp-page-handler="Answer">
+                            <i class="fa fa-send-o"></i>
+                            Enviar Resposta
+                        </button>
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                    @foreach (var answer in Model.Question.Answers)
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <section class="section p-3">
+                                    <div class="card shadow">
+                                        <div class="card-header">
+                                            <div class="float-left">
+                                                <span class="text-primary">Autor: @answer.User</span>
+                                                <button class="btn btn-icon-only btn-sm fa fa-trash"
+                                                        asp-page-handler="DeleteAnswer"
+                                                        asp-route-answerId="@answer.Id"></button>
+                                            </div>
+                                            <div class="float-right">
+                                                @{
+                                                    var myNegVote = answer.Votes.FirstOrDefault(x => x.VoteType == DomainModels.VoteType.Negative && x.User == User.Identity.Name)?.Id;
+                                                    var myPosVote = answer.Votes.FirstOrDefault(x => x.VoteType == DomainModels.VoteType.Positive && x.User == User.Identity.Name)?.Id;
+                                                    var iVoteNeg = myNegVote.HasValue;
+                                                    var iVotePos = myPosVote.HasValue;
+                                                }
+                                                <button type="submit" class="btn btn-sm btn-transparent"
+                                                        asp-page-handler="ToggleVote"
+                                                        asp-route-answerId="@answer.Id"
+                                                        asp-route-voteType="positive"
+                                                        asp-route-voteId="@myPosVote"
+                                                        data-toggle="tooltip"
+                                                        title="Positive Votes">
+                                                    <i class="fa @((iVotePos ? "fa-thumbs-up" : "fa-thumbs-o-up")) text-green"></i>
+                                                    <span class="badge badge-success">@answer.Votes.Count(x => x.VoteType == DomainModels.VoteType.Positive)</span>
+                                                    <span class="sr-only">positive votes</span>
+                                                </button>
+                                                <button type="submit" class="btn btn-sm btn-transparent"
+                                                        asp-page-handler="ToggleVote"
+                                                        asp-route-answerId="@answer.Id"
+                                                        asp-route-voteType="negative"
+                                                        asp-route-voteId="@myNegVote"
+                                                        data-toggle="tooltip"
+                                                        title="Negative Votes">
+                                                    <i class="fa @((iVoteNeg ? "fa-thumbs-down" : "fa-thumbs-o-down")) text-red"></i>
+                                                    <span class="badge badge-danger">@answer.Votes.Count(x => x.VoteType == DomainModels.VoteType.Negative)</span>
+                                                    <span class="sr-only">negative votes</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            @Html.Raw(answer.FormattedText)
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿<answers>: [uid] @count @reverse .
+<creation_date>: datetime @index(hour) @upsert .
+<formatted_text>: string .
+<text>: string @index(fulltext, trigram, term) .
+<type>: string @index(exact) .
+<user>: string @index(exact) .
+<votes>: [uid] @count @reverse .
+
+type Answer {
+  <~votes>: [Vote]
+  <formatted_text>: string
+  <text>: string
+  <creation_date>: datetime
+  <user>: string
+}
+type Question {
+  <~answers>: [Answer]
+  <formatted_text>: string
+  <text>: string
+  <creation_date>: datetime
+  <user>: string
+}
+type Vote {
+  <type>: string
+  <creation_date>: datetime
+  <user>: string
+}

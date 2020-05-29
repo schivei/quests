@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Quests.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Quests.Api.Controllers.AnswersController">
+            <summary>
+            Endpoints for answers
+            </summary>
+        </member>
+        <member name="M:Quests.Api.Controllers.AnswersController.Get(System.String,Quests.Repositories.AnswerStore)">
+            <summary>
+            Get answers of a question
+            </summary>
+            <param name="questionId"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.AnswersController.Post(System.String,Quests.DomainModels.ViewModels.AnswerViewModel,Quests.Repositories.AnswerStore)">
+            <summary>
+            Post answer to question
+            </summary>
+            <param name="questionId"></param>
+            <param name="viewModel"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.AnswersController.Delete(System.String,System.String,Quests.Repositories.AnswerStore)">
+            <summary>
+            Delete a question answer
+            </summary>
+            <param name="questionId"></param>
+            <param name="answerId"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Quests.Api.Controllers.QuestionsController">
+            <summary>
+            Endpoints for questions
+            </summary>
+        </member>
+        <member name="M:Quests.Api.Controllers.QuestionsController.Get(Quests.Repositories.QuestionStore)">
+            <summary>
+            Get all questions
+            </summary>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.QuestionsController.Get(System.String,Quests.Repositories.QuestionStore)">
+            <summary>
+            Get a question
+            </summary>
+            <param name="questionId"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.QuestionsController.Get(System.Int32,System.String,System.String,Quests.Repositories.QuestionStore)">
+            <summary>
+            Paginate questions results
+            </summary>
+            <param name="page">page number</param>
+            <param name="search">passing q query value <code>~/api/questions/paginate/{page:int}?q=search+some+thing</code></param>
+            <param name="orderBy">order by clause <code>~/api/questions/paginate/{page:int}?sort=field:asc</code></param>
+            <param name="store"></param>
+            <returns>Only questions - without children data</returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.QuestionsController.Post(Quests.DomainModels.ViewModels.QuestionViewModel,Quests.Repositories.QuestionStore)">
+            <summary>
+            Create a question
+            </summary>
+            <param name="viewModel"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.QuestionsController.Delete(System.String,Quests.Repositories.QuestionStore)">
+            <summary>
+            Delete a question
+            </summary>
+            <param name="questionId"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Quests.Api.Controllers.VotesController">
+            <summary>
+            Endpoints for votes
+            </summary>
+        </member>
+        <member name="M:Quests.Api.Controllers.VotesController.Get(System.String,System.String,Quests.Repositories.VoteStore)">
+            <summary>
+            List votes of a question answer
+            </summary>
+            <param name="questionId"></param>
+            <param name="answerId"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.VotesController.Post(System.String,System.String,Quests.DomainModels.ViewModels.VoteViewModel,Quests.Repositories.VoteStore)">
+            <summary>
+            Vote in a question answer
+            </summary>
+            <param name="questionId"></param>
+            <param name="answerId"></param>
+            <param name="viewModel"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quests.Api.Controllers.VotesController.Delete(System.String,System.String,Quests.Repositories.VoteStore)">
+            <summary>
+            Delete a vote from question answer
+            </summary>
+            <param name="answerId"></param>
+            <param name="voteId"></param>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="IE=edge; width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="~/img/favicon.png">
+    <title>@ViewData["Title"] - Questions App</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="~/css/nucleo-icons.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/nucleo-svg.css" rel="stylesheet" asp-append-version="true" />
+    <!-- Font Awesome Icons -->
+    <link href="~/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/nucleo-svg.css" rel="stylesheet" asp-append-version="true" />
+    <!-- CSS Files -->
+    <link href="~/css/argon-design-system.css?v=1.2.0" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/simplemde/simplemde.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body class="landing-page">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand bg-dark navbar-dark headroom">
+        <div class="container">
+            <a class="navbar-brand mr-lg-5" asp-page="Index" data-toggle="tooltip" title="Home">
+                @ViewData["Title"] - Questions App
+            </a>
+            <ul class="navbar-nav align-items-end ml-lg-auto">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" asp-page="Login" data-toggle="tooltip" title="Sair">
+                        <i class="fa fa-sign-out"></i>
+                        <span class="nav-link-inner--text">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="section">
+            @RenderBody()
+        </div>
+        <br /><br />
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center justify-content-md-between">
+                    <div class="col-md-6">
+                        <div class="copyright">
+                            &copy; 2020 <a href="http://elton.schivei.nom.br" target="_blank">Elton Schivei Costa</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="~/js/core/jquery.min.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/core/popper.min.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/core/bootstrap.min.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/plugins/perfect-scrollbar.jquery.min.js" asp-append-version="true"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="~/js/plugins/bootstrap-switch.js" asp-append-version="true"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/js/plugins/nouislider.min.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/plugins/moment.min.js" asp-append-version="true"></script>
+    <script src="~/js/plugins/datetimepicker.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/plugins/bootstrap-datepicker.min.js" asp-append-version="true"></script>
+    <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
+    <script src="~/js/argon-design-system.min.js?v=1.2.0" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/lib/simplemde/simplemde.min.js" type="text/javascript" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

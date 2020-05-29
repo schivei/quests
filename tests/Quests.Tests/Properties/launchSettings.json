@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Quests.Tests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Tests"
+      }
+    }
+  }
+}
